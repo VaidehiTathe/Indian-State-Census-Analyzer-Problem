@@ -11,11 +11,11 @@ namespace StateCensusAnalyser
             INVALID_PATH,
             INVALID_EXTENSION
         }
-        public ExceptionType type { get; set; } 
+        public ExceptionType type;  
 
         public StateCensusAnalyserException(string message):base (message)
         {
-            this.type = type;
+           
         }
     }
 }

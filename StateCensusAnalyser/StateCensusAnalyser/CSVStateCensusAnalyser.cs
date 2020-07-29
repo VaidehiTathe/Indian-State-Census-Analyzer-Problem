@@ -34,6 +34,23 @@ namespace StateCensusAnalyser
             {
                 throw new StateCensusAnalyserException("Extension is incorrect");
             }
+
+            try 
+            {
+                string[] data = File.ReadAllLines(filePath);
+                IEnumerable<string> records = data;
+                foreach(var element in records)
+                {
+                    if (element.Split() != element.Split(','))
+                    {
+                        throw new StateCensusAnalyserException("Incorrect delimeter");
+                    }
+                }
+            }
+            catch (StateCensusAnalyserException)
+            {
+                throw new StateCensusAnalyserException("Enter correct directory path");
+            }
         }
     }
     
