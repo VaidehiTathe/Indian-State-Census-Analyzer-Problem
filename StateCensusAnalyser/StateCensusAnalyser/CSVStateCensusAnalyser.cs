@@ -28,7 +28,7 @@ namespace StateCensusAnalyser
         }
         public static void HandleException(string filePath)
         {
-            //filePath = @"E:\CodinClub\Assignments_Fellowship\Indian-State-Census-Analyzer-Problem\StateCensusAnalyser\StateCensusAnalyser\IndiaStateCensusData.csv";
+            string alternateFilePath = @"E:\CodinClub\Assignments_Fellowship\Indian-State-Census-Analyzer-Problem\StateCensusAnalyser\StateCensusAnalyser\data.csv";
             string FilePath = @"E:\CodinClub\Assignments_Fellowship\Indian-State-Census-Analyzer-Problem\StateCensusAnalyser\StateCensusAnalyser\IndiaStateCensusData.txt";
             if (filePath != FilePath)
             {
@@ -45,6 +45,12 @@ namespace StateCensusAnalyser
                     {
                         throw new StateCensusAnalyserException("Incorrect delimeter");
                     }
+                }
+
+                string[] alternateData = File.ReadAllLines(alternateFilePath);
+                if(data[0] != alternateData[0])
+                {
+                    throw new StateCensusAnalyserException("Headers do not match");
                 }
             }
             catch (StateCensusAnalyserException)
