@@ -15,8 +15,19 @@ namespace StateCensusAnalyser
         }
         public static int GetStateCensusRecords(string filepath)
         {
-            string[] numOfRecords = File.ReadAllLines(filepath);
-            return numOfRecords.Length - 1;
+            try
+            {
+                string[] numOfRecords = File.ReadAllLines(filepath);
+                return numOfRecords.Length - 1;
+            }
+            catch (StateCensusAnalyserException)
+            {
+                throw new StateCensusAnalyserException("Enter correct directory path");
+            }
+            catch (FileNotFoundException)
+            {
+                throw new StateCensusAnalyserException("Enter correct directory path");
+            }
         } 
     }
 }

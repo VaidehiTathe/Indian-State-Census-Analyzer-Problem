@@ -8,7 +8,8 @@ namespace StateCensusAnalyser
     {
         public enum ExceptionType
         {
-            INVALID_PATH
+            INVALID_PATH,
+            INVALID_EXTENSION
         }
         public ExceptionType type { get; set; } 
 

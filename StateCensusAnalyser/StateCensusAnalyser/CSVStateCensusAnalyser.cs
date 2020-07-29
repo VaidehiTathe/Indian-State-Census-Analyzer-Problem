@@ -24,6 +24,16 @@ namespace StateCensusAnalyser
             {
                 throw new StateCensusAnalyserException("Enter correct directory path");
             }
+
+        }
+        public static void HandleException(string filePath)
+        {
+            //filePath = @"E:\CodinClub\Assignments_Fellowship\Indian-State-Census-Analyzer-Problem\StateCensusAnalyser\StateCensusAnalyser\IndiaStateCensusData.csv";
+            string FilePath = @"E:\CodinClub\Assignments_Fellowship\Indian-State-Census-Analyzer-Problem\StateCensusAnalyser\StateCensusAnalyser\IndiaStateCensusData.txt";
+            if (filePath != FilePath)
+            {
+                throw new StateCensusAnalyserException("Extension is incorrect");
+            }
         }
     }
     
