@@ -11,6 +11,12 @@ namespace StateCensusAnalyser
             int stateCensusRecords = StateCensusAnalyser.GetStateCensusRecords(filePath);
             Console.WriteLine("csv state census records:" + csvStateCensusRecords);
             Console.WriteLine("state census records:" + stateCensusRecords);
+
+            string stateFilePath = @"E:\CodinClub\Assignments_Fellowship\Indian-State-Census-Analyzer-Problem\StateCensusAnalyser\StateCensusAnalyser\IndiaStateCode.csv";
+            int csvStateCodeRecords = CSVStates.GetRecords(stateFilePath);
+            int stateCodeRecords = StateCodeAnalyser.GetStateCodeRecords(stateFilePath);
+            Console.WriteLine("csv state code records:" + csvStateCodeRecords);
+            Console.WriteLine("state code records:" + stateCodeRecords);
         }
     }
 }

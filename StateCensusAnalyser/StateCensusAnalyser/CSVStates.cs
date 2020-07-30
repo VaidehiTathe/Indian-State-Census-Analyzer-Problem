@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
 namespace StateCensusAnalyser
 {
-    public class CSVStateCensusAnalyser
+    public class CSVStates
     {
         public static int GetRecords(string filePath)
         {
             try
             {
                 int countOfRecords = 0;
-                string[] data = File.ReadAllLines(filePath);
+                String[] data = File.ReadAllLines(filePath);
                 IEnumerable<string> records = data;
                 foreach (var elements in records)
                 {
@@ -20,13 +21,13 @@ namespace StateCensusAnalyser
                 }
                 return countOfRecords - 1;
             }
-            catch(DirectoryNotFoundException)
+            catch (DirectoryNotFoundException)
             {
                 throw new StateCensusAnalyserException("Wrong directory path", StateCensusAnalyserException.ExceptionType.INVALID_PATH);
             }
-            catch(FileNotFoundException)
+            catch (FileNotFoundException)
             {
-                throw new StateCensusAnalyserException("Incorrect file name",StateCensusAnalyserException.ExceptionType.INVALID_EXTENSION);
+                throw new StateCensusAnalyserException("Incorrect file name", StateCensusAnalyserException.ExceptionType.INVALID_EXTENSION);
             }
 
         }
@@ -35,11 +36,11 @@ namespace StateCensusAnalyser
         {
             string[] data = File.ReadAllLines(filePath);
             IEnumerable<string> records = data;
-            foreach(var element in records)
+            foreach (var element in records)
             {
                 if (element.Split() != element.Split(','))
                 {
-                    throw new StateCensusAnalyserException("Incorrect delimeter",StateCensusAnalyserException.ExceptionType.DELIMITER_INCORRECT);
+                    throw new StateCensusAnalyserException("Incorrect delimeter", StateCensusAnalyserException.ExceptionType.DELIMITER_INCORRECT);
                 }
             }
 
@@ -55,5 +56,8 @@ namespace StateCensusAnalyser
                 throw new StateCensusAnalyserException("Headers do not match", StateCensusAnalyserException.ExceptionType.HEADERS_MISSMATCH);
             }
         }
+
     }
+
 }
+
