@@ -5,6 +5,7 @@ namespace CSVAnalyserTest
 {
     public class Tests
     {
+
         [Test]
         public void GivenCSVFile_WhenNumberOfRecordsMatches_ShoulReturnTrue()
         {
