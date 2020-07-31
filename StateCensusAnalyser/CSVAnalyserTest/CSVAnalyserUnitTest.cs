@@ -13,7 +13,7 @@ namespace CSVAnalyserTest
             int records = StateCensusAnalyser.StateCensusAnalyser.GetStateCensusRecords(filePath);
             Assert.AreEqual(CSVRecords, records);
         }
-       
+
         [Test]
         public void GivenCSVFilePath_WhenIncorrect_ShouldThrowCustomException()
         {
@@ -24,11 +24,11 @@ namespace CSVAnalyserTest
                 int records = StateCensusAnalyser.StateCensusAnalyser.GetStateCensusRecords(filePath);
                 Assert.AreEqual(CSVRecords, records);
             }
-            catch(StateCensusAnalyserException e)
+            catch (StateCensusAnalyserException e)
             {
                 Assert.AreEqual(StateCensusAnalyserException.ExceptionType.INVALID_PATH, e.type);
             }
-            
+
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace CSVAnalyserTest
         {
             try
             {
-                string filePath = @"E:\CodinClub\Assignments_Fellowship\Indian-State-Census-Analyzer-Problem\StateCensusAnalyser\StateCensusAnalyser\IndiaStateCensusData.csv";
+                string filePath = @"E:\CodinClub\Assignments_Fellowship\Indian-State-Census-Analyzer-Problem\StateCensusAnalyser\StateCensusAnalyser\IndiaStateCensusData.txt";
                 int CSVRecords = CSVStateCensusAnalyser.GetRecords(filePath);
                 int records = StateCensusAnalyser.StateCensusAnalyser.GetStateCensusRecords(filePath);
                 Assert.AreEqual(CSVRecords, records);
@@ -52,18 +52,30 @@ namespace CSVAnalyserTest
         [Test]
         public void GivenCSVFile_WhenIncorrectDelimiter_ShouldThrowCustomException()
         {
+            try
+            {
+                string filePath = @"E:\CodinClub\Assignments_Fellowship\Indian-State-Census-Analyzer-Problem\StateCensusAnalyser\StateCensusAnalyser\IndiaStateCensusData.csv";
+                int CSVRecords = CSVStateCensusAnalyser.GetRecords(filePath);
+                int records = StateCensusAnalyser.StateCensusAnalyser.GetStateCensusRecords(filePath);
+                Assert.AreEqual(CSVRecords, records);
+            }
+        
+            catch (StateCensusAnalyserException e)
+            {
 
-            string filePath = @"E:\CodinClub\Assignments_Fellowship\Indian-State-Census-Analyzer-Problem\StateCensusAnalyser\StateCensusAnalyser\IndiaStateCensusData.csv";
-            var exception = Assert.Throws<StateCensusAnalyserException>(() => CSVStateCensusAnalyser.checkDelimiters(filePath));//, alternateFilePath));
-            Assert.AreEqual(StateCensusAnalyserException.ExceptionType.DELIMITER_INCORRECT, exception.type);
-        }
+                Assert.AreEqual(StateCensusAnalyserException.ExceptionType.DELIMITER_INCORRECT, e.type);
+            }           
+        }   
+
 
         [Test]
         public void GivenCSVFile_WhenHeadersDoNotMatch_ShouldThrowCustomException()
         {
 
             string filePath = @"E:\CodinClub\Assignments_Fellowship\Indian-State-Census-Analyzer-Problem\StateCensusAnalyser\StateCensusAnalyser\IndiaStateCensusData.csv";
-            var exception = Assert.Throws<StateCensusAnalyserException>(() => CSVStateCensusAnalyser.HeaderException(filePath));
+            string alternateFilePath = @"E:\CodinClub\Assignments_Fellowship\Indian-State-Census-Analyzer-Problem\StateCensusAnalyser\StateCensusAnalyser\data.csv";
+
+            var exception = Assert.Throws<StateCensusAnalyserException>(() => CSVStateCensusAnalyser.HeaderException(filePath,alternateFilePath));
             Assert.AreEqual(StateCensusAnalyserException.ExceptionType.HEADERS_MISSMATCH, exception.type);
 
         }
@@ -117,7 +129,7 @@ namespace CSVAnalyserTest
         {
 
             string filePath = @"E:\CodinClub\Assignments_Fellowship\Indian-State-Census-Analyzer-Problem\StateCensusAnalyser\StateCensusAnalyser\IndiaStateCode.csv";
-            var exception = Assert.Throws<StateCensusAnalyserException>(() => CSVStates.checkDelimiters(filePath));//, alternateFilePath));
+            var exception = Assert.Throws<StateCensusAnalyserException>(() => CSVStates.checkDelimiters(filePath));
             Assert.AreEqual(StateCensusAnalyserException.ExceptionType.DELIMITER_INCORRECT, exception.type);
         }
 
