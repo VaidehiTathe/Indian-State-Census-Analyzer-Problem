@@ -11,49 +11,41 @@ namespace StateCensusAnalyser
         {
             try
             {
-                int countOfRecords = 0;
-                string[] data = File.ReadAllLines(filePath);
-                IEnumerable<string> records = data;
-                foreach (var elements in records)
-                {
-                    countOfRecords++;
-                }
-                return countOfRecords - 1;
+                int records = CensusAnalyserUtility.GetRecords(filePath);
+                return records;
             }
-            catch(DirectoryNotFoundException)
+            catch (StateCensusAnalyserException e)
             {
-                throw new StateCensusAnalyserException("Wrong directory path", StateCensusAnalyserException.ExceptionType.INVALID_PATH);
-            }
-            catch(FileNotFoundException)
-            {
-                throw new StateCensusAnalyserException("Incorrect file name",StateCensusAnalyserException.ExceptionType.INVALID_EXTENSION);
+                throw new StateCensusAnalyserException(e.Message, e.type);
             }
 
         }
 
         public static void checkDelimiters(string filePath)
         {
-            string[] data = File.ReadAllLines(filePath);
-            IEnumerable<string> records = data;
-            foreach(var element in records)
-            {
-                if (element.Split() != element.Split(','))
-                {
-                    throw new StateCensusAnalyserException("Incorrect delimeter",StateCensusAnalyserException.ExceptionType.DELIMITER_INCORRECT);
-                }
-            }
 
+            try
+            {
+                CensusAnalyserUtility.checkDelimiters(filePath);
+            }
+            catch (StateCensusAnalyserException e)
+            {
+
+                throw new StateCensusAnalyserException(e.Message, e.type);
+            }
         }
 
-        public static void HeaderException(string filePath)
+        public static void HeaderException(string filePath, string alternateFilePath)
         {
-            string alternateFilePath = @"E:\CodinClub\Assignments_Fellowship\Indian-State-Census-Analyzer-Problem\StateCensusAnalyser\StateCensusAnalyser\data.csv";
-            string[] data = File.ReadAllLines(filePath);
-            string[] alternateData = File.ReadAllLines(alternateFilePath);
-            if (data[0] != alternateData[0])
+            try
             {
-                throw new StateCensusAnalyserException("Headers do not match", StateCensusAnalyserException.ExceptionType.HEADERS_MISSMATCH);
+                CensusAnalyserUtility.HeaderException(filePath);
+            }
+            catch (StateCensusAnalyserException e)
+            {
+
+                throw new StateCensusAnalyserException(e.Message, e.type);
             }
         }
-    }
+    }       
 }

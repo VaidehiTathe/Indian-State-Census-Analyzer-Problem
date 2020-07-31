@@ -16,9 +16,8 @@ namespace StateCensusAnalyser
         public static int GetStateCensusRecords(string filepath)
         {
             try
-            {
-                string[] numOfRecords = File.ReadAllLines(filepath);
-                return numOfRecords.Length - 1;
+            {               
+                return CensusAnalyserUtility.GetRecords(filepath);            
             }
             catch (StateCensusAnalyserException)
             {
