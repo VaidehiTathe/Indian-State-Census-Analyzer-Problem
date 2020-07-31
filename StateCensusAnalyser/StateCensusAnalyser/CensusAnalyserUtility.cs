@@ -15,12 +15,13 @@ namespace StateCensusAnalyser
                 int countOfRecords = 0;
                 string[] data = File.ReadAllLines(filePath);
                 IEnumerable<string> records = data;
+                List<string> dataList = new List<string>();
                 foreach (var elements in records)
                 {
                     countOfRecords++;
-                }
-
-                return countOfRecords - 1;
+                    dataList.Add(elements);      
+                }                             
+                return dataList.Count - 1;
             }
             catch (DirectoryNotFoundException)
             {
